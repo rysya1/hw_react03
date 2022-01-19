@@ -1,19 +1,15 @@
 import React from 'react'
 
 const List = (props) => {
+    // console.log(props.data);
 	return (
 		<div>
-			{props.data.map((el, id) => {
-				return (
-					<div key={id}>
-						<h1>{el.title}</h1>
-						<h2>{el.num}</h2>
-                        <h2>{el.date}</h2>
-					</div>
-				)
-			})}
+         <ul>
+             {props.data.map(el => <p key={el}>{el.title}{el.num}{el.date}</p>)}
+         </ul>
+			
 		</div>
 	)
 }
 
-export default List
+export default List;

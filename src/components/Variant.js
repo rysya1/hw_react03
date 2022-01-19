@@ -1,71 +1,54 @@
 import { useState } from 'react'
 import List from './List'
 import './Variant.css'
+
 function Variant1(props) {
-	const [title, setTitle] = useState('')
-	const [num, setNum] = useState('')
-	const [date, setDate] = useState('')
-	const [show, setShow] = useState([])
-	// const userHandler = (event) => {
-	//     setUser(event.target.value)
-	// }
+	// const [title, setTitle] = useState('')
+	// const [num, setNum] = useState('')
+	// const [date, setDate] = useState('')
+   const [array,setArray] = useState([]);
 
-	const titleHandler = (event) => {
-		setTitle(event.target.value)
+	const [data, setData] = useState({
+		title: '',
+		num: '',
+		date: '',
+	})
+
+	const onChangeInput = (e) => {
+		const key = e.target.name
+		setData({
+			...data,
+			[key]: e.target.value,
+		})
 	}
 
-	const numHandler = (event) => {
-		setNum(event.target.value)
-	}
-
-	const dateHandler = (event) => {
-		setDate(event.target.value)
-	}
-
-	const submit = (event) => {
-		event.preventDefault()
-		const expenseData = {
-			title: title,
-			num: num,
-			date: new Date(date).toString(),
-		}
-		setShow([...show, expenseData])
+	const onSubmit = (e) => {
+		e.preventDefault()
+		setArray([...array,data])
+		console.log(array)
 	}
 	return (
 		<div>
-			<form onSubmit={submit}>
+			<form onSubmit={onSubmit}>
 				<h1>🦄</h1>
+				<input name='title' type='text' onChange={onChangeInput}></input>
 				<input
-					type='text'
-					value={title}
-					onChange={titleHandler}
-				></input>
-				<input
+					name='num'
 					type='number'
 					min='1'
-					value={num}
-					onChange={numHandler}
+					onChange={onChangeInput}
 				></input>
 				<input
+					name='date'
 					className='inp3'
-					value={date}
 					type='date'
-					onChange={dateHandler}
+					onChange={onChangeInput}
 				></input>
+
 				<button type='submit'>ADD</button>
 			</form>
-            <List data = {show}/>
+			<List data={array}/>
 		</div>
 	)
 }
 export default Variant1
-// const addSubmit = () => {
-//     const epenseData = {
-//         user:user,
-
-//       }
-//       // console.log(epenseDate);
-//       props.onSaveExpenseData(epenseData)
-//       addTask(user),
-//         setUser("")
-// }
